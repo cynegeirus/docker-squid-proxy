@@ -1,0 +1,24 @@
+services:
+  proxy:
+    image: ubuntu/squid:5.2-22.04_beta
+    container_name: proxy
+    hostname: proxy
+    volumes:
+      - proxy-log:/var/log/squid
+      - proxy-spool:/var/spool/squid
+      - proxy-data1:/etc/squid
+      - proxy-data2:/usr/local/squid
+    environment:
+      - TZ=UTC
+    ports:
+      - "3128:3128"
+    networks:
+      - default
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+
+volumes:
+  proxy-log:
+  proxy-data:
+  proxy-main:
+  proxy-web:
